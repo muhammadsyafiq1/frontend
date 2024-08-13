@@ -13,6 +13,15 @@ const ProductList = () => {
     setProducts(response.data);
   };
 
+  const deleteProduct = async(productId) =>{
+    try {
+      await axios.delete(`http://localhost:5000/products/${productId}`)
+      getProducts()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="container mt-5">
       <div className="columns is-multiline">
@@ -36,7 +45,7 @@ const ProductList = () => {
               </div>
               <footer className="card-footer">
                 <a className="card-footer-item">Edit</a>
-                <a className="card-footer-item">Delete</a>
+                <a onClick={()=>deleteProduct(product.id)} className="card-footer-item">Delete</a>
               </footer>
             </div>
           </div>
